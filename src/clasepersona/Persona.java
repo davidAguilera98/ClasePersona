@@ -12,18 +12,16 @@ public class Persona {
     public Persona(String nombre, String apellidos) {
         if ("".equals(nombre) || "".equals(apellidos)) {
             throw new IllegalArgumentException();
-
         } else {
             this.nombre = nombre;
             this.apellidos = apellidos;
         }
     }
 
-    public Persona(String nombre, String apellidos, String fechaNacimiento) throws IllegalArgumentException {
-
+    public Persona(String nombre, String apellidos, String fechaNacimiento) throws
+            IllegalArgumentException {
         if ("".equals(nombre) || "".equals(apellidos)) {
             throw new IllegalArgumentException();
-
         } else {
             this.nombre = nombre;
             this.apellidos = apellidos;
@@ -40,25 +38,18 @@ public class Persona {
         return apellidos;
     }
 
-    /**
-     *
-     * @param separador
-     * @return
-     */
     public String getFechaNacimiento(char separador) {
         String fecha = null;
-
         if (separador != '-' && separador != '/') {
             throw new IllegalArgumentException();
-
         } else {
             if (this.fechaNacimiento != null) {
-                fecha = String.format("%02d%c%02d%c%04d", this.fechaNacimiento.getDayOfMonth(), separador,
+                fecha = String.format("%02d%c%02d%c%04d", this.fechaNacimiento.getDayOfMonth(),
+                        separador,
                         this.fechaNacimiento.getMonthValue(), separador, this.fechaNacimiento.getYear());
             }
             return fecha;
         }
-
     }
 
     public String getFechaNacimiento() {
@@ -70,11 +61,9 @@ public class Persona {
     }
 
     private LocalDate generarFecha(String fecha) {
-
         int dia;
         int mes;
         int anyo;
-
         if (!fecha.matches("[0-9]{2}[-][0-9]{2}[-][0-9]{4}")
                 && !fecha.matches("[0-9]{2}[/][0-9]{2}[/][0-9]{4}")) {
             throw new IllegalArgumentException();
@@ -83,16 +72,14 @@ public class Persona {
                 dia = Integer.parseInt(fecha.subSequence(0, 2).toString());
                 mes = Integer.parseInt(fecha.subSequence(3, 5).toString());
                 anyo = Integer.parseInt(fecha.subSequence(6, fecha.length()).toString());
-
                 return LocalDate.of(anyo, mes, dia);
-            } catch (NumberFormatException ex1) {
-                throw new IllegalArgumentException();
-            } catch (DateTimeException ex2) {
+            } catch (NumberFormatException | DateTimeException ex1) {
                 throw new IllegalArgumentException();
             }
-
         }
-
     }
-
 }
+ /*   public int getEdadEnFecha(String cadenaFecha) {
+        
+    }
+}*/
